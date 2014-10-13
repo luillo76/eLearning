@@ -109,28 +109,9 @@ def write_portfolio(file_path, na_portfolio):
 
     return
 
-def run_simulation(data):
-    success = 0
-
-    for params in data:
-        if random.gauss(params[0], params[1]) > 0:
-            success += 1
-
-    return success
-
-
 def print_results(dt_start, dt_end):
     print 'The final value of the portfolio using the sample file is -- 2011,12,20,1133860'
     print 'Data Range :  ', dt_start,'  to ', dt_end
-
-
-def plot_results(results):
-    plt.hist(results, bins = (np.amax(results) - np.amin(results)), normed = True)
-    plt.title('Election Results')
-    plt.xlabel('Margin')
-    plt.ylabel('Probability')
-    plt.show()
-
 
 def main(argv):
     initial_cash = float(argv[0])
