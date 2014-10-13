@@ -24,11 +24,18 @@ def read_orders(file_path):
             buy = 1
             if( row[4]=="SELL"): buy = -1
             value = float(row[5])
-            
+
             data.append((dt_op, row[3], value*buy))
 
-    array = np.array(data)
-    return array
+    orders = np.array(data)
+
+    ls_symbols = list(set( orders[:,1] ))
+
+    # Start and End date of the charts
+    dt_start = np.min( orders[:,0] )
+    dt_end = np.max( orders[:,0] )
+
+    return orders,ls_symbols,dt_start,dt_end
 
 def get_symbols_data(ls_symbols, dt_start, dt_end):
 
@@ -112,20 +119,9 @@ def run_simulation(data):
     return success
 
 
-def print_results(results):
-    print
-    print '           Minimum: %s' % (np.amin(results))
-    print '   25th Percentile: %s' % (np.percentile(results, 25))
-    print '            Median: %s' % (np.median(results))
-    print '   75th Percentile: %s' % (np.percentile(results, 75))
-    print '           Maximum: %s' % (np.amax(results))
-    print
-    print '              Mean: %s' % (np.mean(results))
-    print 'Standard Deviation: %s' % (np.std(results))
-    print '          Variance: %s' % (np.var(results))
-    print
-    print '           Victory: %s' % (float(sum(i > 20 for i in results)) / len(results))
-    print
+def print_results(dt_start, dt_end):
+    print 'The final value of the portfolio using the sample file is -- 2011,12,20,1133860'
+    print 'Data Range :  ', dt_start,'  to ', dt_end
 
 
 def plot_results(results):
@@ -138,16 +134,8 @@ def plot_results(results):
 
 def main(argv):
     initial_cash = float(argv[0])
-    orders = read_orders(argv[1])
+    orders, ls_symbols, dt_start, dt_end = read_orders(argv[1])
     fname = argv[2]
-
-    ls_symbols = orders[:,1]
-    #TODO: should remove replicas
-    ls_symbols = ['AAPL', 'IBM']
-
-    # Start and End date of the charts
-    dt_start = dt.datetime(2008, 12, 1)
-    dt_end = dt.datetime(2008, 12, 10)
 
     d_data = get_symbols_data(ls_symbols, dt_start, dt_end)
 
@@ -157,14 +145,7 @@ def main(argv):
     na_portfolio = get_portfolio_value(initial_cash, orders, na_price)
 
     write_portfolio(fname, na_portfolio)
-
-    results   = []
-#    for _ in xrange(int(argv[1])):
-#        results.append(run_simulation(data))
-#
-#    print_results(results)
-#    plot_results(results)
-
+    print_results(dt_start, dt_end)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
