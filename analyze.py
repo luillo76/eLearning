@@ -110,7 +110,7 @@ def plot_results(na_price, outfile_path):
     plt.xlabel('Date')
     plt.ylabel('Fund value')
     plt.savefig(outfile_path, format='pdf')
-    plt.show()
+    #plt.show()
 
 def main(argv):
     values, dt_start, dt_end = read_portfolio_values(argv[0])
