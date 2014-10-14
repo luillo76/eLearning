@@ -22,7 +22,7 @@ def read_orders(file_path):
             year, month, day = int(row[0]), int(row[1]), int(row[2])
             dt_op = dt.datetime(year, month, day)
             buy = 1
-            if( row[4]=="SELL"): buy = -1
+            if( row[4].lower()=="sell"): buy = -1
             value = float(row[5])
 
             data.append((dt_op, row[3], value*buy))
