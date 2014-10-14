@@ -123,7 +123,7 @@ def main(argv):
     d_data = get_symbols_data(ls_symbols, dt_start, dt_end_read)
 
     # Getting the numpy ndarray of actual close prices
-    na_price = d_data['actual_close']
+    na_price = d_data['close']
 
     na_portfolio = get_portfolio_value(initial_cash, orders, na_price)
 
