@@ -118,7 +118,9 @@ def main(argv):
     orders, ls_symbols, dt_start, dt_end = read_orders(argv[1])
     fname = argv[2]
 
-    d_data = get_symbols_data(ls_symbols, dt_start, dt_end)
+    dt_end_read = dt_end + dt.timedelta(days=1)
+
+    d_data = get_symbols_data(ls_symbols, dt_start, dt_end_read)
 
     # Getting the numpy ndarray of actual close prices
     na_price = d_data['actual_close']
@@ -126,7 +128,7 @@ def main(argv):
     na_portfolio = get_portfolio_value(initial_cash, orders, na_price)
 
     write_portfolio(fname, na_portfolio)
-    print_results(dt_start, dt_end)
+    print_results(dt_start, dt_end_read)
 
 if __name__ == "__main__":
     main(sys.argv[1:])

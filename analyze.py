@@ -80,42 +80,33 @@ def get_output(vector):
     return sharpe, cum_ret, vol, daily_ret
 
 
-def print_results(dt_start, dt_end, na_normalized_price):
-
-    sharpe1, cum_ret1, vol1, daily_ret1 = get_output( na_normalized_price[:,0] )
-    sharpe2, cum_ret2, vol2, daily_ret2 = get_output( na_normalized_price[:,1] )
+def print_results(dt_start, dt_end, ls_symbols, na_normalized_price):
 
     print 'Details of the Performance of the portfolio'
 
     print 'Data Range : ', dt_start, '  to ', dt_end
 
-    print 'Sharpe Ratio of Fund : %s' % sharpe1
-    print 'Sharpe Ratio of $SPX : %s' % sharpe2
+    for i in range(0,len(ls_symbols)):
+        symbol = ls_symbols[i]
+        sharpe, cum_ret, vol, daily_ret = get_output( na_normalized_price[:,i] )
 
-    print 'Total Return of Fund : %s' % cum_ret1
-    print 'Total Return of $SPX : %s' % cum_ret2
-
-    print 'Standard Deviation of Fund : %s' % vol1
-    print 'Standard Deviation of $SPX : %s' % vol2
-
-    print 'Average Daily Return of Fund : %s' % daily_ret1
-    print 'Average Daily Return of $SPX : %s' % daily_ret2
+        print ''
+        print 'Sharpe Ratio of %s : %s' % (symbol,sharpe)
+        print 'Total Return of %s : %s' % (symbol,cum_ret)
+        print 'Standard Deviation of %s : %s' % (symbol,vol)
+        print 'Average Daily Return of %s : %s' % (symbol,daily_ret)
 
 def plot_results(na_price, outfile_path):
 
-    print na_price, len(na_price)
     ldt_timestamps = list(na_price.index)
-    na_portfolio = na_price.values,
+    na_portfolio = na_price.values
     ls_symbols = list(na_price.columns)
-
-    print ldt_timestamps, len(ldt_timestamps)
-    print na_portfolio, len(na_portfolio)
 
     plt.clf()
     plt.plot(ldt_timestamps, na_portfolio)
     plt.legend('portfolio')
     plt.legend(ls_symbols)
-    #    plt.title(title)
+    #plt.title(title)
     plt.xlabel('Date')
     plt.ylabel('Fund value')
     plt.savefig(outfile_path, format='pdf')
@@ -145,13 +136,12 @@ def main(argv):
     na_normalized_price = na_price.values
     na_normalized_price /= na_normalized_price[0, :]
 
-    print na_normalized_price
-
-    print_results(dt_start, dt_end, na_normalized_price)
+    ls_symbols = na_price.columns
+    print_results(dt_start, dt_end, ls_symbols, na_normalized_price)
 
     outfile_path = argv[0]+".pdf"
     
-    #plot_results(na_price, outfile_path)
+    plot_results(na_price, outfile_path)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
