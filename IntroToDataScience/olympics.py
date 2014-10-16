@@ -1,6 +1,5 @@
 from pandas import DataFrame, Series
 
-
 def create_dataframe():
     '''
     Create a pandas dataframe called 'olympic_medal_counts_df' containing
