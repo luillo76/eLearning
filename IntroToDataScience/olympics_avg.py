@@ -1,5 +1,5 @@
 from pandas import DataFrame, Series
-from numpy
+import numpy
 
 def avg_medal_count():
     '''
