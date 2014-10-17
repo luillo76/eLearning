@@ -61,4 +61,29 @@ def simple_heuristic(file_path):
         #
         # Your code here
         #
+        passenger_id = passenger['PassengerId']
+
+        survied = 0
+        if  (passenger['Sex'] == "male"):
+            survied = 0
+        elif(passenger['Sex'] == "female"):
+            survied = 1
+        predictions[passenger_id] = survied
+        
     return predictions
+
+def check_accuracy(file_name):
+    total_count = 0
+    correct_count = 0
+    df = pandas.read_csv(file_name)
+    predictions = simple_heuristic(file_name)
+    for row_index, row in df.iterrows():
+        total_count += 1
+        if predictions[row['PassengerId']] == row['Survived']:
+            correct_count += 1
+    print  correct_count, total_count
+    return float(correct_count)/float(total_count)
+
+if __name__ == "__main__":
+    simple_heuristic_success_rate = check_accuracy("simple_heuristics/titanic_data.csv")
+    print simple_heuristic_success_rate
