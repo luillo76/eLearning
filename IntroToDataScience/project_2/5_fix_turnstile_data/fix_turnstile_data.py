@@ -33,6 +33,23 @@ def fix_turnstile_data(filenames):
     '''
     for name in filenames:
         # your code here
+        outfile = open("updated_" + name, 'w')
+        csv_writer = csv.writer(outfile)
+
+        with open(name) as f:
+            for line in f:
+                line = line.strip('\n')
+                line = line.strip('\r')
+                line = line.strip(' ')
+                words = line.split(',')
+
+                for i in range(3,len(words)):
+                    if(words[3] != words[i]): continue
+                    row_to_enter = [words[0],words[1],words[2],words[i],words[i+1],words[i+2],words[i+3],words[i+4]]
+                    if(row_to_enter[6] == "003178345"): print row_to_enter
+                    if(row_to_enter[6] == "003124594"): print row_to_enter
+
+                    csv_writer.writerow(row_to_enter)
 
 if __name__ == "__main__":
     input_files = ['turnstile_110528.txt', 'turnstile_110604.txt']

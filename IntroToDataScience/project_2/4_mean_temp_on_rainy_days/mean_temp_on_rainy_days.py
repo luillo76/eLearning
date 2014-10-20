@@ -23,7 +23,8 @@ def min_temperature_on_rainy_days(filename):
     q = """
     your query here
     """
-    
+    q = "select avg(cast (mintempi as integer)) from weather_data where rain=1 and cast(mintempi as integer) > 55;"  
+
     #Execute your SQL command against the pandas frame
     mean_temp_weekends = pandasql.sqldf(q.lower(), locals())
     return mean_temp_weekends
