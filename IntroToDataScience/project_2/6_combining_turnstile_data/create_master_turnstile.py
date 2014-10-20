@@ -25,9 +25,13 @@ def create_master_turnstile_file(filenames, output_file):
     line 5 ...
     '''
     with open(output_file, 'w') as master_file:
-       master_file.write('C/A,UNIT,SCP,DATEn,TIMEn,DESCn,ENTRIESn,EXITSn\n')
-       for filename in filenames:
-                # your code here
+        master_file.write('C/A,UNIT,SCP,DATEn,TIMEn,DESCn,ENTRIESn,EXITSn\n')
+        for filename in filenames:
+            # your code here
+            with open(filename) as f:
+                f.readline()
+                for line in f:
+                    master_file.write(line)
 
 if __name__ == "__main__":
     input_files = ['turnstile_110528.txt', 'turnstile_110604.txt']
