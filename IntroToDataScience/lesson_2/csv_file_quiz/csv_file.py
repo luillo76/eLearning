@@ -15,6 +15,9 @@ def add_full_name(path_to_csv, path_to_new_csv):
     #path_to_new_csv
 
     #WRITE YOUR CODE HERE
+    df = pandas.DataFrame().from_csv(path_to_csv)
+    df['nameFull'] = df['nameFirst'] + df['nameLast']
+    df.to_csv(path_to_new_csv)
 
 if __name__ == "__main__":
     input_filename =  "Master.csv"
