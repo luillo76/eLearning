@@ -25,7 +25,8 @@ def max_temp_aggregate_by_fog(filename):
     q = """
     your query here
     """
-    
+    q = "select count(*) from weather_data where rain=1;"
+
     #Execute your SQL command against the pandas frame
     rainy_days = pandasql.sqldf(q.lower(), locals())
     return rainy_days
