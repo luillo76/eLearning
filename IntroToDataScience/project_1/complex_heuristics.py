@@ -78,5 +78,5 @@ def check_accuracy(file_name):
     return float(correct_count)/float(total_count)
 
 if __name__ == "__main__":
-    simple_heuristic_success_rate = check_accuracy("simple_heuristics/titanic_data.csv")
+    simple_heuristic_success_rate = check_accuracy("titanic_data.csv")
     print simple_heuristic_success_rate

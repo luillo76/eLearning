@@ -98,5 +98,5 @@ def check_accuracy(file_name):
 
 
 if __name__ == "__main__":
-    custom_heuristic_success_rate = check_accuracy('custom_heuristics/titanic_data.csv')
+    custom_heuristic_success_rate = check_accuracy('titanic_data.csv')
     print custom_heuristic_success_rate
