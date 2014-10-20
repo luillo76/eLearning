@@ -1,6 +1,7 @@
 import numpy
 import pandas
 import statsmodels.api as sm
+import math
 
 def custom_heuristic(file_path):
     '''
@@ -64,9 +65,38 @@ def custom_heuristic(file_path):
 
     predictions = {}
     df = pandas.read_csv(file_path)
+    fare_mean = numpy.mean(df['Fare'])
     for passenger_index, passenger in df.iterrows():
         #
         # your code here
         #
+        passenger_id = passenger['PassengerId']
+
+        survied = 0
+        if(passenger['Sex'] == "female" ):
+            survied = 1
+        elif(passenger['Age'] <= 18 and passenger['Pclass']==1 ):
+            survied = 1
+        #elif(not pandas.isnull( passenger['Cabin'] )):
+        #    survied = 1
+        #elif(passenger['Fare'] > fare_mean):
+        #    survied = 1
+        
+        predictions[passenger_id] = survied
     return predictions
 
+def check_accuracy(file_name):
+    total_count = 0
+    correct_count = 0
+    df = pandas.read_csv(file_name)
+    predictions = custom_heuristic(file_name)
+    for row_index, row in df.iterrows():
+        total_count += 1
+        if predictions[row['PassengerId']] == row['Survived']:
+            correct_count += 1
+    return float(correct_count)/float(total_count)
+
+
+if __name__ == "__main__":
+    custom_heuristic_success_rate = check_accuracy('custom_heuristics/titanic_data.csv')
+    print custom_heuristic_success_rate
