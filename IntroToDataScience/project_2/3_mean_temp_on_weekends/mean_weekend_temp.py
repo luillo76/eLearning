@@ -31,6 +31,9 @@ def avg_min_temperature(filename):
     q = """
     your query here
     """
+
+    q = "select avg(cast (meantempi as integer)) from weather_data where cast (strftime('%w', date) as integer)= 0 or cast (strftime('%w', date) as integer)=6;"
+
     
     #Execute your SQL command against the pandas frame
     mean_temp_weekends = pandasql.sqldf(q.lower(), locals())
