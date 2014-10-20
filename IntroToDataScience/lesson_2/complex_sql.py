@@ -34,7 +34,7 @@ def complex_sql(filename):
     # into this exercise below:
     # https://www.dropbox.com/s/vn8t4uulbsfmalo/aadhaar_data.csv
         
-    q = # your code here
+    q = "select gender,district,sum(aadhaar_generated) from aadhaar_data where age>50 group by gender,district;"
 
     # Execute your SQL command against the pandas frame
     aadhaar_solution = pandasql.sqldf(q.lower(), locals())

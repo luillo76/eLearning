@@ -17,6 +17,7 @@ def select_first_50(filename):
     q = """
     #YOUR QUERY HERE
     """
+    q = "select registrar, enrolment_agency from aadhaar_data limit 50;"
 
     #Execute your SQL command against the pandas frame
     aadhaar_solution = pandasql.sqldf(q.lower(), locals())
