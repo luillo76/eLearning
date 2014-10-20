@@ -16,7 +16,7 @@ def add_full_name(path_to_csv, path_to_new_csv):
 
     #WRITE YOUR CODE HERE
     df = pandas.DataFrame().from_csv(path_to_csv)
-    df['nameFull'] = df['nameFirst'] + df['nameLast']
+    df['nameFull'] = df['nameLast'] + ' ' + df['nameFirst']
     df.to_csv(path_to_new_csv)
 
 if __name__ == "__main__":
