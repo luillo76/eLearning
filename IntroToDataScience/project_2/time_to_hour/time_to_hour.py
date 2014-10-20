@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 
 def time_to_hour(time):
     '''
@@ -14,7 +14,7 @@ def time_to_hour(time):
     Please return hour as an integer.
     '''
     
-    hour = # your code here
+    hour = int(time.split(':')[0])# your code here
     return hour
 
 if __name__ == "__main__":
