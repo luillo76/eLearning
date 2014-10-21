@@ -37,17 +37,12 @@ def fix_turnstile_data(filenames):
         csv_writer = csv.writer(outfile)
 
         with open(name) as f:
-            for line in f:
-                line = line.strip('\n')
-                line = line.strip('\r')
-                line = line.strip(' ')
-                words = line.split(',')
+            csv_reader = csv.reader(f)
+            for row in csv_reader:
 
-                for i in range(3,len(words)):
-                    if(words[3] != words[i]): continue
-                    row_to_enter = [words[0],words[1],words[2],words[i],words[i+1],words[i+2],words[i+3],words[i+4]]
-                    if(row_to_enter[6] == "003178345"): print row_to_enter
-                    if(row_to_enter[6] == "003124594"): print row_to_enter
+                #row_to_enter = list(row[:3]+row[i:i+5] for i in range(3,len(row),5))
+                for i in range(3,len(row),5):
+                    row_to_enter = row[:3]+row[i:i+5]
 
                     csv_writer.writerow(row_to_enter)
 

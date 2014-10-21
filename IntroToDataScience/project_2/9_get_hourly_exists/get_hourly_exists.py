@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 
 def get_hourly_exits(grp):
     '''

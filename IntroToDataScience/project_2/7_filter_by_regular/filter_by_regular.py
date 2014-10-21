@@ -18,8 +18,8 @@ def filter_by_regular(filename):
     2,A002,R051,02-00-00,05-01-11,08:00:00,REGULAR,3144353,1088177
     '''
     
-    turnstile_data = # your code here
-    # more of your code here
+    turnstile_data = pd.io.parsers.read_csv(filename)
+    turnstile_data = turnstile_data[ turnstile_data['DESCn'] == 'REGULAR' ]
     return turnstile_data
 
 
@@ -27,5 +27,5 @@ if __name__ == "__main__":
     input_filename = "turnstile_data_master.csv"
     output_filename = "output.csv"
     student_df = filter_by_regular(input_filename)
-    student_df.to_csv(filter_by_regular)
+    student_df.to_csv(output_filename)
     
