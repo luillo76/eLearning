@@ -12,7 +12,8 @@ def compute_r_squared(data, predictions):
     # that you might find useful, but you don't have to use them.
 
     # YOUR CODE GOES HERE
-
+    mean = np.mean(data)
+    r_squared = 1.0 - np.sum( (data-predictions)**2)/np.sum( (data-mean)**2 ) 
     return r_squared
 
 

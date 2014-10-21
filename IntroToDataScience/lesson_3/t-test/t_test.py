@@ -32,6 +32,13 @@ def compare_averages(filename):
     For example, the tuple that you return may look like:
     (True, (9.93570222, 0.000023))
     """
+    df = pandas.read_csv(filename)
+    t,prob= scipy.stats.ttest_ind(df['HR'][df['handedness']=='R'].values,
+                                  df['HR'][df['handedness']=='L'].values)
+    if(prob<0.05):
+        return False,t,prob
+    else:
+        return True,t,prob
 
 
 if __name__ == '__main__':
