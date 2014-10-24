@@ -22,6 +22,9 @@ def compute_cost(features, values, theta):
     #
     # your code here
     #
+    m = len(values)
+    sum_of_square_errors = np.square(np.dot(features, theta) - values).sum()
+    cost = sum_of_square_errors / (2*m)
 
     return cost
 
@@ -36,9 +39,15 @@ def gradient_descent(features, values, theta, alpha, num_iterations):
     cost_history = []
 
     for i in range(num_iterations):
-        # 
-        # your code here
-        #
+       # 
+       # your code here
+       #
+       predicted_values = np.dot(features, theta)
+       theta += np.dot((values - predicted_values), features)*alpha/m
+       cost = compute_cost(features, values, theta)
+       cost_history.append(cost)
+       print cost
+
     return theta, pd.Series(cost_history)
 
 def predictions(dataframe):
@@ -60,7 +69,7 @@ def predictions(dataframe):
     the 30 second  limit that's placed on running your program. Try using a smaller number
     for num_iterations if that's the case.
     
-    Or if you are using your own algorithm/modesl, see if you can optimize your code so it
+    Or if you are using your own algorithm/models, see if you can optimize your code so it
     runs faster.
     '''
 
