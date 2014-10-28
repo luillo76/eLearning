@@ -57,19 +57,19 @@ def read_symbols(dt_start, dt_end, ls_symbols):
 def compute_bollinger(dataframe):
 
     for sym in dataframe.columns:
-        df = pd.DataFrame(dataframe[sym])
-        #todo -> df = pd.DataFrame(dataframe.values, index=[dataframe.index])
-        df['rollmean']  = pd.stats.moments.rolling_mean(df[sym].values,20)
-        df['rollstd']   = pd.stats.moments.rolling_std (df[sym].values,20)
-        df['bollinger'] = (df[sym] - df['rollmean'])/df['rollstd']
+        df = pd.DataFrame( {'value' : dataframe[sym].values.ravel()}, index=dataframe.index )
+        df['rollmean']  = pd.stats.moments.rolling_mean(df['value'].values,20)
+        df['rollstd']   = pd.stats.moments.rolling_std (df['value'].values,20)
+        df['bollinger'] = (df['value'] - df['rollmean'])/df['rollstd']
 
+        print df.tail()
         plot_bollinger(sym, df)
                                                            
 def plot_bollinger(sym, dataframe):
     plt.clf()
 
     plt.subplot(2, 1, 1)
-    plt.plot(dataframe.index, dataframe[sym].values)
+    plt.plot(dataframe.index, dataframe['value'].values)
     plt.plot(dataframe.index, dataframe['rollmean'].values)
     plt.ylabel('Adjusted close')
     plt.xlabel('Date')
