@@ -12,12 +12,17 @@ def mapper():
     reader = csv.reader(sys.stdin, delimiter='\t')
     writer = csv.writer(sys.stdout, delimiter='\t', quotechar='"', quoting=csv.QUOTE_ALL)
 
-    lines = {}
+    mydict = {}
     for line in reader:
-
         # YOUR CODE HERE
-        writer.writerow(line)
+        value = len(line[4])
+        mydict[value] = line
 
+    n = len(mydict)
+    for key in sorted(mydict):
+        n -= 1
+        if(n>=10): continue
+        writer.writerow(mydict[key])
 
 
 test_text = """\"\"\t\"\"\t\"\"\t\"\"\t\"333\"\t\"\"
