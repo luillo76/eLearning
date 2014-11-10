@@ -21,11 +21,11 @@ def lineplot(hr_year_csv):
     # https://github.com/yhat/ggplot/
     
     
-    df = pd.read_csv(hr_year_csv,index_col=0)        
-    gg = ggplot(df, aes('yearID', 'HR'))
-
-    #+ geom_point(color = 'coral') + geom_line(color='coral') + \
-    #    ggtitle('title') + xlab('x-label') + ylab('y-label')
+    df = pd.read_csv(hr_year_csv,index_col=0)
+    gg = ggplot(aes(x="yearID", y="HR"), data=df) +\
+         geom_point(color = 'red') + \
+         geom_line(color='red') + \
+         ggtitle('') + xlab('yearID') + ylab('HR')
 
     return gg
 
