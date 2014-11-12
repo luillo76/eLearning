@@ -6,7 +6,7 @@ import logging
 #logging.basicConfig(filename=mapper_logfile, format='%(message)s',
 #                    level=logging.INFO, filemode='w')
 
-def mapper(test_text):
+def mapper():
 
     #Also make sure to fill out the reducer code before clicking "Test Run" or "Submit".
 
@@ -28,7 +28,7 @@ def mapper(test_text):
     #logging.info("My debugging message")
 
     firstline = True
-    for line in test_text:
+    for line in sys.stdin:
         #your code here
         if firstline:
             firstline = False
@@ -36,9 +36,6 @@ def mapper(test_text):
 
         data = line.strip().split(",")
         if len(data) != 12: continue
-        print data
+        print '{}\t{}'.format(data[3],data[8])
 
-file = open("test", "r")
-test_text = file.readlines()
-
-mapper(test_text)
+mapper()
